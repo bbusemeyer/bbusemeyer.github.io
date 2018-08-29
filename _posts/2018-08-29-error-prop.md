@@ -1,6 +1,6 @@
 --- 
 layout: single
-title: Error propagation
+title: Linearized error propagation
 category: notes
 tags: [math,probability,statistics]
 excerpt: How errors haunt you from one calculation to the next.

@@ -101,7 +101,7 @@ analytics:
 # Site Author
 author:
   name             : "Brian Busemeyer"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/profile.jpg"
   bio              : "Brian is a Ph.D candidate in physics at UIUC. He studies unconventional superconductors with quantum Monte Carlo, among other things."
   location         : "Urbana, IL, USA"
   email            :
