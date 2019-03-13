@@ -25,4 +25,4 @@ $$
 $$
 can represent correlations in electron density (like Hubbard-interactions), as well as other correlations. 
 
-[These notes]({{ "/assets/pdfs/nonorthogonal.pdf" }}) discuss the construction and interpretation of the density matrix, and some nice tricks you can do with them.
+[These notes]({{ "/assets/pdfs/density_matrices.pdf" }}) discuss the construction and interpretation of the density matrix, and some nice tricks you can do with them.
