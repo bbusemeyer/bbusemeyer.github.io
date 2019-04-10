@@ -16,14 +16,14 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Brian's research website"
+title                    : "Research perspectives"
 title_separator          : "-"
 name                     : "Brian Busemeyer"
 description              : "Research updates, math notes, and computing tips."
 url                      : "https://bbusemeyer.github.io/"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "bbusemeyer/bbusemeyer.github.io.git"
-teaser                   : "/assets/images/profile.png"
+teaser                   : "/assets/images/profile.jpg"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
