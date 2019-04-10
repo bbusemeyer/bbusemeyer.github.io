@@ -10,8 +10,8 @@ The one-body reduced density matrix can be succinctly represented as
 $$
 \langle \Psi | c_i^\dagger c_j | \Psi \rangle.
 $$
-It's diagonal is simply the density of electrons. 
-It's off-diagonal represents a measure of the correlation between the occupation of two single-particle orbitals.
+Its diagonal is simply the density of electrons. 
+Its off-diagonal represents a measure of the correlation between the occupation of two single-particle orbitals.
 This is often interpreted as "hopping" (although there is no dynamical aspect to it) because large elements between two atoms implies there is bonding between those atoms.
 A tight binding model is a model that is expressed in terms of the one-body density matrix.
 
