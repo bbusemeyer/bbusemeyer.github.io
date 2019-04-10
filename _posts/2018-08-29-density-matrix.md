@@ -6,10 +6,6 @@ tags: [math,physics,operators,density matrix,coarse graining,Koopman's theorem]
 excerpt: The reduced density matrix is a tool for analyzing the many-body wave function in terms of one-body, two-body, and other lower-body operators.
 ---
 
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
 The one-body reduced density matrix can be succinctly represented as 
 $$
 \langle \Psi | c_i^\dagger c_j | \Psi \rangle.

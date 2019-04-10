@@ -6,10 +6,6 @@ tags: [physics,research,code,tools]
 excerpt: How to convert a pseudopotential format using ppconvert.
 ---
 
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
 Some [basic documentation]({{ "https://code.google.com/archive/p/qmcpack/wikis/ppconvert.wiki" }}) already exists on the web, but there were some tricks that [Paul]({{ "http://publish.illinois.edu/yubo-paul-yang" }}) told me and saved me many hours of fiddling.
 
 My task was to covert a Si pseudopotential from the [BFD web site]({{"http://www.burkatzki.com/pseudos/index.2.html"}}) to a format that can be read in by Quantum Espresso. 
