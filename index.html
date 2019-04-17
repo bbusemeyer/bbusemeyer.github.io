@@ -8,23 +8,5 @@ header:
 excerpt: Understanding the collective behaviors inside materials through the lens of numerics
 ---
 
-<!--
-<body>
-  <header> About this site: </header>
-  <font size='4'>
-    <p>
-      Seeing the variety of materials in our world, its easy to forget that almost all of it arises from interactions of just a few particles: electrons, protons, and neutrons.
-      We know very precisely how these components interact in small populations, but the way macroscopic populations lead to all the diverse behaviors we see is still a mystery.
-    </p>
-    <p>
-      I'm working on better ways of leveraging the knowledge the microscopic to understand the macroscopic.
-      My favorite tools are numerics, statistics/data science, and visualization.
-      This site will contain what I've learned so far, as well as the tips and tricks that got me there. 
-    </p>
-    <p>
-      Check out "Papers" for my publications, "Notes" for more down-to-earth tricks and proofs alike, and catagories or tags to search for buzzwords. 
-    </p>
-
- </font>
-</body>
--->
+{% capture intro %}{% include intro.md %}{% endcapture %}
+{{ intro | markdownify }}
