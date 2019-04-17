@@ -2,7 +2,8 @@ Seeing the variety of materials in our world, its easy to forget that almost all
 We know very precisely how these components interact in small populations, but the way macroscopic populations lead to all the diverse behaviors we see is still a mystery.
 
 I'm working on better ways of leveraging the knowledge of the microscopic to understand the macroscopic.
-My favorite tools are **numerics**, **statistics**/**data science**, and **visualization**.
+My favorite tools are numerics like **quantum Monte Carlo** and **density functional theory**, **statistics**/**data science**, and **visualization**.
+
 This site will contain what I've learned so far, as well as the tips and tricks that got me there. 
 
 * [Papers][3] for my publication highlights, or else [my Google Scholar page][1].
