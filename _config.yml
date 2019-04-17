@@ -79,8 +79,7 @@ head_scripts:
 
 collections:
   papers:
-    output: true
-    permalink: /:collection/:path
+    output: True
 
 # Social Sharing
 twitter:

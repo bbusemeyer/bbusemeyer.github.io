@@ -1,0 +1,52 @@
+{% if paper.header.teaser %}
+  {% capture teaser %}{{ paper.header.teaser }}{% endcapture %}
+{% else %}
+  {% assign teaser = site.teaser %}
+{% endif %}
+
+{% if paper.id %}
+  {% assign title = paper.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = paper.title %}
+{% endif %}
+
+<div class="{{ include.type | default: "list" }}__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    {% if include.type == "grid" and teaser %}
+      <div class="archive__item-teaser">
+        <img src=
+          {% if teaser contains "://" %}
+            "{{ teaser }}"
+          {% else %}
+            "{{ teaser | relative_url }}"
+          {% endif %}
+          alt="">
+      </div>
+    {% endif %}
+    <h2 class="archive__item-title" itemprop="headline">
+      {% if paper.link %}
+        <a href="{{ paper.link }}">{{ title }}</a> <a href="{{ paper.url | relative_url }}" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+      {% else %}
+        <a href="{{ paper.url | relative_url }}" rel="permalink">{{ title }}</a>
+      {% endif %}
+    </h2>
+    <p class="page__meta" itemprop="description">
+    {% if paper.journal %}
+      <i>{{ paper.journal }}</i>,
+    {% endif %}
+    {% if paper.year %}
+      {% if paper.month %}
+        {{paper.month}},
+      {% endif %}
+      ({{ paper.year }})
+    {% endif %}
+    </p>
+    {% if paper.excerpt %}<p class=".notice--info" itemprop="description">{{ paper.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
+    {% if paper.doi %}
+      <a class="btn btn--success" href="http://doi.org/{{ paper.doi }}">Link to article</a>
+    {% endif %}
+    {% if paper.arxiv %}
+      <a class="btn btn--danger" href="http://arxiv.org/abs/{{ paper.arxiv }}">arXiv</a>
+    {% endif %}
+  </article>
+</div>

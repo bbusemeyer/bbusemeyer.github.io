@@ -5,10 +5,13 @@ I'm working on better ways of leveraging the knowledge of the microscopic to und
 My favorite tools are **numerics**, **statistics**/**data science**, and **visualization**.
 This site will contain what I've learned so far, as well as the tips and tricks that got me there. 
 
-* "Papers" for my publication highlights, or else [my Google Scholar page][1].
-* "Notes" for down-to-earth tricks and proofs alike.
-* "Categories" or "tags" to search for buzzwords. 
+* [Papers][3] for my publication highlights, or else [my Google Scholar page][1].
+* [Notes][4] for down-to-earth tricks and proofs alike.
+* [Categories][5] or "tags" to search for buzzwords. 
 
 
 [1]: https://scholar.google.com/citations?user=hY_Q3YkAAAAJ&hl=en&oi=sra
 [2]: https://arxiv.org/search/?searchtype=author&query=Busemeyer%2C+B
+[3]: /papers/
+[4]: /notes/
+[5]: /categories/
