@@ -80,6 +80,8 @@ head_scripts:
 collections:
   papers:
     output: True
+  notes:
+    output: True
 
 # Social Sharing
 twitter:

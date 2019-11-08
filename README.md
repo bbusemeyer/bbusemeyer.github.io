@@ -7,7 +7,10 @@ I'll try to keep this web site up-to-date with tips and notes that were useful t
 You can fork and edit this repo to get a copy of this web site for yourself!
 That's what I did to [Ryan Levy](https://ryanlevy.github.io) (and of course the minimal-mistakes repo). 
 
-Important: when editing things, don't double `site/`, because that is overwritten with each compilation.
+- Important: when editing things, don't double `site/`, because that is overwritten with each compilation.
+- If something doesn't update in the website, it's probably because you need to restart the server. I think this includes anything in `_config.yaml`.
+- Check the Jekyll documentation for help adjusting the structure, organization, and defaults of the web site.
+- Check the minimal-mistakes page for help only if that fails. His documentation is more professional-grade and Jekyl's is for noobs.
 
 ### Getting Jekyll set up.
 
@@ -36,12 +39,17 @@ TBA
 ### Making my `papers` page.
 
 More information in the git log of this repo, but in short:
-
-- Make a papers template.
-- Added HTML to `_includes/archive-paper`.
-- Added `papers-archive.html` to `_pages/`.
-- Added a MD file to `_papers/`.
+- Edit `_data/navigation.yml`. This changes the header of the home page.
+- Added HTML: `_includes/archive-paper.html`. This HTML specifies how the papers page displays the information.
+- Added `papers-archive.html` to `_pages/`. This will be the papers summary page.
+- Added a MD file to `_papers/`. This adds a new papers post.
+These settings are connected together through their permalink and their layout.
+Make sure these are consistent.
 
 ### Other modifications.
 
 - Modified font sizes with `_sass/minimal-mistakes/_archive.scss` and `_sass/minimal-mistakes/_page.scss`, which modifies properties of those page templates.
+
+# TO DO.
+
+- Fill in summaries of other papers.
