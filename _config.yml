@@ -108,8 +108,8 @@ analytics:
 author:
   name             : "Brian Busemeyer"
   avatar           : "/assets/images/profile.jpg"
-  bio              : "Brian is a Ph.D candidate in physics at UIUC. He studies unconventional superconductors with quantum Monte Carlo, among other things."
-  location         : "Urbana, IL, USA"
+  bio              : "Brian is a Flatiron Research Fellow at the CCQ in the Flatiron Institute. He develops and applies methods for solving the Schroedinger equation, such as quantum Monte Carlo, to better understand correlated electron systems."
+  location         : "New York, NY, USA"
   email            :
   uri              :
   home             : # null (default), "absolute or relative url to link to author home"
