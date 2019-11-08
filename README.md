@@ -7,6 +7,8 @@ I'll try to keep this web site up-to-date with tips and notes that were useful t
 You can fork and edit this repo to get a copy of this web site for yourself!
 That's what I did to [Ryan Levy](https://ryanlevy.github.io) (and of course the minimal-mistakes repo). 
 
+Important: when editing things, don't double `site/`, because that is overwritten with each compilation.
+
 ### Getting Jekyll set up.
 
 Resources:
@@ -30,3 +32,16 @@ TBA
 ### Adding papers.
 
 TBA
+
+### Making my `papers` page.
+
+More information in the git log of this repo, but in short:
+
+- Make a papers template.
+- Added HTML to `_includes/archive-paper`.
+- Added `papers-archive.html` to `_pages/`.
+- Added a MD file to `_papers/`.
+
+### Other modifications.
+
+- Modified font sizes with `_sass/minimal-mistakes/_archive.scss` and `_sass/minimal-mistakes/_page.scss`, which modifies properties of those page templates.
