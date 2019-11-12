@@ -5,7 +5,7 @@ category: notes
 tags: [vim,productivity]
 excerpt: Syntastic will alert you to syntax errors before compilation or running the code, saving you time.
 ---
-
+Syntastic will alert you to syntax errors before compilation or running the code, saving you time.
 No, you don't need to use an IDE for syntax correction!
 
 I used [vundle]({% post_url 2019-11-08-vundle %}) to install it in one command.
@@ -25,3 +25,23 @@ After that, things worked perfectly.
 
 This will also enable it to use it's built-in syntax checkers.
 There's information on its page about how to add additional checkers.
+
+# Later troubleshooting
+
+## Missing C++ headers. 
+
+I encountered an issue with syntastic flagging missing C++ headers that were actually in another directory. 
+This turned out to be fixable with adding 
+```
+let g:syntastic_c_include_dirs = [ '../include', 'include' ]
+```
+to my `.vimrc`, which tells Vundle to look there for headers. 
+
+## Python version control.
+
+Another fixable issue was updating the python syntax to python3. 
+```
+let g:syntastic_python_checkers = ['python3']
+```
+did the job. 
+It's also possible to define functions to switch this as needed.
