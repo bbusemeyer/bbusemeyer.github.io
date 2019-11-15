@@ -40,8 +40,8 @@ to my `.vimrc`, which tells Vundle to look there for headers.
 ## Python version control.
 
 Another fixable issue was updating the python syntax to python3. 
+I had to to a `pip3 install --user pyflakes` and then set
 ```
-let g:syntastic_python_checkers = ['python3']
-```
-did the job. 
+let g:syntastic_python_checkers = ['pyflakes']
+```.
 It's also possible to define functions to switch this as needed.
