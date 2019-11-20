@@ -37,6 +37,12 @@ let g:syntastic_c_include_dirs = [ '../include', 'include' ]
 ```
 to my `.vimrc`, which tells Vundle to look there for headers. 
 
+This only works if you are willing to list out all the header locations, which I quickly found to be annoying as hell.
+When you get to that point,
+```
+let g:syntastic_c_remove_include_errors=1
+```
+
 ## Python version control.
 
 Another fixable issue was updating the python syntax to python3. 
