@@ -13,7 +13,7 @@ I built the site using [Jekyll]({{ "https://jekyllrb.com/" }}), [minimal-mistake
 
 <img align="right" src="/assets/images/profile.jpg" width="200" style="margin: 0px 10px" />
 
-I'm a Ph. D. candidate at the University of Illinois physics department. 
+I'm a Flatiron Research Fellow at the [Center for Computational Quantum Physics](https://www.simonsfoundation.org/flatiron/center-for-computational-quantum-physics) in the Flatiron Institute. 
 I've been studying transition metal compounds through the lens of computer simulations since my undergraduate days of 2011. 
 
 My current work focus on generating copious amounts of data using detailed diffusion Monte Carlo simulations, then applying statistical and data science techniques to wrangle the results into something interesting.
