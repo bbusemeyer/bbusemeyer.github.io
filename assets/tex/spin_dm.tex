@@ -1,0 +1,181 @@
+
+\documentclass[10pt]{article}
+
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{mycommands}
+\usepackage{hyperref}
+
+\newcommand{\eV}{\mtx{eV}}
+\newcommand{\nm}{\mtx{nm}}
+\newcommand{\varep}{\varepsilon}
+
+\setlength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\topmargin}{-0.25in}
+\setlength{\headheight}{-0.25in}
+\setlength{\headsep}{0in}
+\setlength{\textwidth}{7.0in}
+\setlength{\textheight}{9.5in}
+\setlength{\parindent}{.25in}
+\setlength{\parskip}{0in}
+
+\begin{document}
+
+\title{Computing spin correlations with 2-body density matrix\\ and other misc notes}
+\maketitle
+
+Operators are written like variables for simplicity. What is or isn't an operator should be clear from context.
+
+\section{Computing spin correlations with 2-body density matrix}
+
+The prerequisites are that 
+\begin{align}
+  &
+  S_\pm = S_x \pm i S_y,
+  &&
+  S_z = \frac 12 (c_\up^\dag c_\up - c_\dn^\dag c_\dn)
+  &
+\end{align}
+which can be found by Wikipedia, looking for ``spin operator". 
+Using this, 
+\begin{align}
+  &
+  S_x = \frac 12 (S_+ + S_-)
+  &&
+  S_y = \frac 1{2i} (S_+ - S_-)
+  &
+\end{align}
+You can also derive this by taking $S_\alpha = c^\dag_\sigma \tau_{\alpha,\sigma\sigma'} c_{\sigma'}$, where $\tau_{\alpha,\sigma\sigma'}$ are the Pauli matrices.
+
+The rest is careful algebra after plugging these in. 
+\begin{align}
+  S_i \cdot S_j
+  &=
+  S_{ix} S_{jx} 
+  +
+  S_{iy} S_{jy} 
+  +
+  S_{iz} S_{jz} 
+  \\
+  &=
+  \frac 12 (
+    S_{i+} S_{j-} + S_{i-} S_{j+}
+  )
+  + 
+  S_{iz} S_{jz}
+  \\
+  &=
+  \frac 12 \lt(
+    c_{i\up}^\dag
+    c_{i\dn}
+    c_{j\dn}^\dag
+    c_{j\up}
+    +
+    c_{i\dn}^\dag
+    c_{i\up}
+    c_{j\up}^\dag
+    c_{j\dn}
+  \rt)
+  +
+  \frac 14 \lt(
+    c_{i\up}^\dag
+    c_{i\up}
+    c_{j\up}^\dag
+    c_{j\up}
+    +
+    c_{i\dn}^\dag
+    c_{i\dn}
+    c_{j\dn}^\dag
+    c_{j\dn}
+    -
+    c_{i\dn}^\dag
+    c_{i\dn}
+    c_{j\up}^\dag
+    c_{j\up}
+    -
+    c_{i\up}^\dag
+    c_{i\up}
+    c_{j\dn}^\dag
+    c_{j\dn}
+  \rt)
+  \\
+  &=
+  -\frac 12 \lt(
+    c_{i\up}^\dag
+    c_{j\dn}^\dag
+    c_{i\dn}
+    c_{j\up}
+    +
+    c_{j\up}^\dag
+    c_{i\dn}^\dag
+    c_{j\dn}
+    c_{i\up}
+  \rt)
+  -
+  \frac 14 \lt(
+    c_{i\up}^\dag
+    c_{j\up}^\dag
+    c_{i\up}
+    c_{j\up}
+    +
+    c_{i\dn}^\dag
+    c_{j\dn}^\dag
+    c_{i\dn}
+    c_{j\dn}
+    +
+    c_{j\up}^\dag
+    c_{i\dn}^\dag
+    c_{i\dn}
+    c_{j\up}
+    +
+    c_{i\up}^\dag
+    c_{j\dn}^\dag
+    c_{j\dn}
+    c_{i\up}
+  \rt)
+\end{align}
+The last step is rearranging the operators according to the chemistry notation~(\ref{eq:chem}).
+Using that notation,
+\begin{align}
+  S_i \cdot S_j
+  &=
+  -\frac 12 \lt(
+    \rho_{ijji}^{\up\dn}
+    +
+    \rho_{jiij}^{\up\dn}
+  \rt)
+  -
+  \frac 14 \lt(
+    \rho_{ijji}^{\up\up}
+    +
+    \rho_{ijji}^{\dn\dn}
+    +
+    \rho_{jjii}^{\up\dn}
+    +
+    \rho_{iijj}^{\up\dn}
+  \rt)
+\end{align}
+
+\section{Misc notes when working on this}
+
+\verb|PySCF| uses the ``chemistry notation'' when storing the 2-body density matrix. In particular,
+\begin{align}
+  \label{eq:chem}
+  \rho^{\up \dn}_{ijkl}
+  =
+  \abr{c_{i\up}^\dag c_{k\dn}^\dag c_{l\dn} c_{j\up}}
+\end{align}
+This is documented in, for example, the FCI \verb|make_rdm12s| docstring. 
+This notation has the advantage that when $k = j$ the center becomes a density operator.
+
+Using $\{c_i^\dag,c_j\} = 0$, it differs by a sign and \verb|swapaxes| from the physics notation (TODO verify this...it's been a while and this is from memory):
+\begin{align}
+  \rho^{\up \dn}_{ijkl}
+  =
+  \abr{c_{i\up}^\dag c_{j\dn}^\dag c_{k\up} c_{l\dn}}
+\end{align}
+
+\end{document}
+

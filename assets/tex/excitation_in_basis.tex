@@ -1,0 +1,165 @@
+
+\documentclass[10pt]{article}
+
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{mycommands}
+\usepackage{hyperref}
+
+\newcommand{\eV}{\mtx{eV}}
+\newcommand{\nm}{\mtx{nm}}
+\newcommand{\varep}{\varepsilon}
+
+\setlength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\topmargin}{-0.25in}
+\setlength{\headheight}{-0.25in}
+\setlength{\headsep}{0in}
+\setlength{\textwidth}{7.0in}
+\setlength{\textheight}{9.5in}
+\setlength{\parindent}{.25in}
+\setlength{\parskip}{0in}
+
+\begin{document}
+
+\section{Doing MO excitation for a hamiltonian in a localized basis. }
+
+I first came across this when trying to form singles excitations for a embedded hamiltonian for AFQMC. 
+I figured I'd write down the notes so I wouldn't need to rederive this again. 
+
+\subsection{Definitions}
+
+The elements of a localized basis will be $\ket{\alpha} = a^\dag_\alpha \ket{0}$.
+The MO basis for a SCF calculation is $\ket{\phi_i} = c_i^\dag \ket{0}$. 
+
+\subsection{Occupying the LOs for a representation of the ground state SCF determinant}
+
+The localized orbitals are defined in terms of occupied and unoccupied MOs, so the first $N_\mtx{elec}$ LO orbitals, $\ket{\alpha}$, are rotations of occupied MOs.
+Therefore the SCF ground state is equivilent to a determinant that is constructed from occupying the occupied local orbitals.
+This state would look something like:
+\begin{align}
+  \ket{\Phi^{(0)}} 
+  &\sim
+  \begin{pmatrix}
+    1 &   &        &  &  &   \\
+      & 1 &        &  &  &   \\
+      &   & \ddots &  &  &   \\
+      &   &  & \ddots  &  &   \\
+      &   &        &  &  & 1  \\
+    0 & \cdots &  &  &  & 0 \\
+    \vdots & \ddots & \ddots & \ddots & & \vdots \\
+    0 & \cdots & & & & 0
+  \end{pmatrix}
+  =
+  \Phi_{\alpha \alpha'}
+  = 
+  \braket{\alpha}{\alpha'}
+\end{align}
+The shape of the matrix is $N_\mtx{basis} \times N_\mtx{occ}$.
+There's one like that for each spin.
+The python command is \\\verb|np.concatenate( (np.eye(maxN),np.zeros((nBasis-maxN,maxN))) )|.
+In this case the ``MOs" \textbf{are} the LOs.
+
+This construction of the ground state is more convenient than rotating the SCF ground state into a localized basis, because when freezing the localized basis by location, many occupied MOs will overlap with a single LO.
+You know which LO are active, but each MO has some overlap with an occupied LO. 
+When you freeze the system, you can truncate the hamiltonian, but it is difficult to know which rows or columns to remove from a SCF determinent in the MO basis. 
+
+\subsection{Performing an excitation on a different basis}
+
+Essentially a HOMO-LUMO excitation would be something like:
+\begin{align}
+  \ket{\Phi^{(1)}} 
+  &=
+  c_{i+1}^\dag c_i \ket{\Phi^{(0)}}
+\end{align}
+Changing basis from the MOs to the LOs can be found:
+\begin{align}
+  c_i^\dag \ket{0}
+  &=
+  \ket{\phi_i}
+  =
+  \sum_\alpha 
+  \ket{\alpha} \braket{\alpha}{\phi_i}
+  =
+  \sum_\alpha 
+  a_\alpha^\dag \ket{0} \braket{\alpha}{\phi_i}
+  \\
+  &=
+  \lt(
+    \sum_\alpha 
+    a_\alpha^\dag \braket{\alpha}{\phi_i}
+  \rt)
+  \ket{0}
+\end{align}
+So:
+\begin{align}
+  & c_i^\dag = \sum_\alpha a_\alpha^\dag \braket{\alpha}{\phi_i} &
+  & c_i = \sum_\alpha \braket{\phi_i}{\alpha} a_\alpha &
+  \\
+\end{align}
+Then:
+\begin{align}
+  c_{i+1}^\dag c_i 
+  \ket{\Phi^{(0)}}
+  &=
+  \sum_{\alpha \alpha'}
+  \braket{\alpha}{\phi_{i+1}}
+  \braket{\phi_i}{\alpha'}
+  \lt(
+    a_\alpha^\dag a_{\alpha'} \ket{\Phi^{(0)}}
+  \rt)
+\end{align}
+Then $ a_\alpha^\dag a_{\alpha'} \ket{\Phi^{(0)}} $ represents a determinant where the diagonal of the $\alpha'$ column is zeroed and row $\alpha$ is 1.
+Columns $\alpha' > N_\mtx{occ}$ are not affected, which is good because they don't exist.
+
+The values of the off-diagonal are easily $
+  \braket{\alpha}{\phi_{i+1}}
+  \braket{\phi_i}{\alpha'}
+$, because these are the only contributions to it.
+So:
+\begin{align}
+  \label{eq:offdiag}
+  \Phi^{(1)}_{\alpha \alpha'}
+  &=
+  \braket{\alpha}{\phi_{i+1}}
+  \braket{\phi_i}{\alpha'}
+  \qquad
+  :\alpha \ne \alpha'
+\end{align}
+The values on the diagonal are harder to compute directly, because they get some weight for every $
+    a_\alpha^\dag a_{\alpha'} \ket{\Phi^{(0)}}
+$ that don't touch that column.
+Probably the easiest way to get the diagonal is to enforce normalization of the columns, which represents the normalization of the orbitals that are occupied:
+\begin{align}
+  \label{eq:diag}
+  \Phi_{\alpha \alpha}
+  &=
+  1 
+  -
+  \sum_{\alpha' \ne \alpha}
+  \Phi_{\alpha' \alpha}^2
+\end{align}
+Eqns. (\ref{eq:offdiag}) and (\ref{eq:diag}) are sufficient to compute the singles excitation in the LO basis.
+
+\subsection{Checking that the excitation can be done safely inside an active region}
+
+The above works out well only if the active space LOs can represent the ground and excited state. 
+One simple check for this is to check the normalization in the active space for both orbitals.
+\begin{align}
+  &
+  \sum_{\alpha \in \mca{A}}
+  \braket{\alpha}{\phi_i}^2
+  = 1
+  &
+  &
+  \sum_{\alpha \in \mca A}
+  \braket{\alpha}{\phi_{i+1}}^2
+  = 1,
+  &
+\end{align}
+where $\alpha \in \mca{A}$ means LOs only in the active space.
+If this doesn't hold, then the excitation requires orbitals that are frozen, and hence cannot be expressed correctly within the active space you've chosen.
+
+\end{document}
+
