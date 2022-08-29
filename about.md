@@ -5,10 +5,7 @@ permalink: /about/
 ---
 
 This research page is a collection of notes, tips, and research goodies that I've collected during my studies. 
-
-Check out the [categories]({{ "/categories/" }}) or the [tags]({{ "/tags/" }}) page to get searching for what you're after.
-
-I built the site using [Jekyll]({{ "https://jekyllrb.com/" }}), [minimal-mistakes]({{ "https://mmistakes.github.io/minimal-mistakes/" }}), and shamelessly stealing from [Ryan Levy]({{ "https://ryanlevy.github.io/" }}) (thanks Ryan!).
+I'm reconstructing it, since the old repository I was using broke with some updates. I'll probably simplify things. Stay tuned!
 
 ## About me
 
