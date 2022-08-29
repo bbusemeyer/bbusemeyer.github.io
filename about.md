@@ -17,4 +17,4 @@ I've been studying transition metal compounds through the lens of computer simul
 My current work focus on generating copious amounts of data using detailed diffusion Monte Carlo simulations, then applying statistical and data science techniques to wrangle the results into something interesting.
 Check out my [resume]({{ "/assets/pdfs/resume_2018.pdf" | absolute_url }}) for more details.
 
-Besides work, feel free to chat with me about biking, history podcasts, algorithms, badminton, rock climbing, running, and playing drums.
+Besides work, feel free to chat with me about creative writing, books, history podcasts, algorithms, badminton, rock climbing, running, and playing drums.
