@@ -14,7 +14,7 @@ Here's how I set up my language servers for C++ and Python.
 # Prerequisites: Neovim (not required!) and language server packages.
 
 You don't need Neovim (`nvim`) to use a language server, but I used Neovim, so that's what's here. 
-[Here's how I set up Neovim]({% post_url 2022-08-13-neovim.md %}).
+[Here's how I set up Neovim]({% post_url 2022-08-13-neovim %}).
 
 ## C++ language servers.
 
