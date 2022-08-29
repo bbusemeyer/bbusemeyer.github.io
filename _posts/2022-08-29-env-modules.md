@@ -48,7 +48,7 @@ I found where by issuing
 pamac list -f env-modules
 ```
 which listed all the files associated with `env-modules`.
-In that list, I found `/etc/modules/init/zsh`. 
+In that list, I found `/etc/modules/init/zsh` (my shell is `zsh`, maybe yours is `bash`, there's one for that too). 
 
 ```
 source /etc/modules/init/zsh
