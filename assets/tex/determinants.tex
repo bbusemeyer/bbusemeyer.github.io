@@ -1,0 +1,556 @@
+
+\documentclass[10pt]{article}
+
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{mycommands}
+\usepackage{hyperref}
+
+\newcommand{\eV}{\mtx{eV}}
+\newcommand{\nm}{\mtx{nm}}
+\newcommand{\varep}{\varepsilon}
+
+\setlength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\topmargin}{-0.25in}
+\setlength{\headheight}{-0.25in}
+\setlength{\headsep}{0in}
+\setlength{\textwidth}{7.0in}
+\setlength{\textheight}{9.5in}
+\setlength{\parindent}{.25in}
+\setlength{\parskip}{0in}
+
+\begin{document}
+
+\section{\label{sec:slnorm} Orthonormality of Slater determinant}
+  \begin{align*}
+    \ket \Psi
+    &=
+    \frac{1}{\sqrt{N!}} 
+    \sum_{i_1\cdots i_N} \epsilon_{i_1 \cdots i_N}
+    \phi_{i_1}(\mbf r_i,\sigma_i)
+    \cdots
+    \phi_{i_N}(\mbf r_N,\sigma_N) \\
+    \implies
+    \braket \Psi \Psi
+    &=
+    \frac1{N!} \int d\mbf r_1 \cdots d\mbf r_N
+    \lt[\sum_{i_1\cdots i_N} \epsilon_{i_1 \cdots i_N} 
+    \phi_{i_1}^*(\mbf r_1,\sigma_1) \cdots \rt]
+    \lt[\sum_{j_1\cdots j_N} \epsilon_{j_1 \cdots j_N} 
+    \phi_{j_1}(\mbf r_1,\sigma_1)   \cdots \rt] \\
+    &=
+    \frac 1{N!} \sum_{i_1\cdots i_N} \sum_{j_1\cdots j_N}
+    \epsilon_{i_1 \cdots i_N}  \epsilon_{j_1 \cdots j_N}  
+    \lt[\int d\mbf r_1 \phi_{i_1}^*(\mbf r_1,\sigma_1) \phi_{j_1}(\mbf r_1,\sigma_1)\rt]
+    \cdots
+    \lt[\int d\mbf r_N \phi_{i_N}^*(\mbf r_N,\sigma_N) \phi_{j_N}(\mbf r_N,\sigma_N)\rt]
+  \end{align*} 
+  Each integral is a $\delta_{ij}$ assuming the orbitals are orthonormal.
+  \begin{align*} 
+    \implies
+    \braket \Psi \Psi
+    &=
+    \frac{1}{N!} \sum_{i_1 \cdots i_N} \epsilon_{i_1 \cdots i_N}^2
+    =
+    \frac{N!}{N!} = 1
+  \end{align*} 
+
+\section{\label{sec:overlap} Taking overlaps of Slater determinants in a basis}
+
+  The expression from the \S~\ref{sec:slnorm} can be generalized to different determinants, and for an arbitrary basis:
+  \begin{align}
+    \braket{\Phi}{\Psi'}
+    &=
+    \frac 1{N!} \sum_{i_1\cdots i_N} \sum_{j_1\cdots j_N}
+    \epsilon_{i_1 \cdots i_N}  \epsilon_{j_1 \cdots j_N}  
+    \braket{\phi_{i_1}}{\psi_{j_1}}
+    \cdots
+    \braket{\phi_{i_N}}{\psi_{j_N}}
+  \end{align}
+  The ordering of the first index is irrelevant, and it cancels the prefactor:
+  \begin{align}
+    \braket{\Phi}{\Psi'}
+    &=
+    \sum_{j_1\cdots j_N}
+    \epsilon_{j_1 \cdots j_N}  
+    \braket{\phi_{1}}{\psi_{j_1}}
+    \cdots
+    \braket{\phi_{N}}{\psi_{j_N}}
+  \end{align}
+  This is the form of a determinant. In fact, for a determinant expressed in matrix form for a basis, $\ket{\alpha}$ with overlap $S_{\alpha,\alpha'}$, denoted $\Phi_{\alpha i} = \braket{\alpha}{\phi_i}$,
+  \begin{align}
+    \braket{\Phi}{\Psi'}
+    &=
+    \mrm{Det}\;(\Phi^T_{i,\alpha} S_{\alpha,\alpha'} \Psi_{\alpha',j})
+  \end{align}
+  This is because $\Phi^T_{i,\alpha} S_{\alpha,\alpha'} \Psi_{\alpha',j}$ results in a matrix of the overlaps:
+  \begin{align}
+    \Phi^T_{i,\alpha} S_{\alpha,\alpha'} \Psi_{\alpha',j}
+    &=
+    \begin{pmatrix}
+      \braket{\phi_1}{\psi_1} & \cdots & \braket{\phi_1}{\psi_N} \\
+      \vdots                 &        & \vdots \\
+      \braket{\phi_N}{\psi_1} & \cdots & \braket{\phi_N}{\psi_N}
+    \end{pmatrix}
+  \end{align}
+
+\section{\label{sec:slegy} Energy of a Slater determinant wavefunction}
+  \begin{align*}
+    \ket \Psi
+    &=
+    \frac{1}{\sqrt{N!}} 
+    \sum_{\{i_\alpha\}}
+    \epsilon_{i_1 \cdots i_N}
+    \prod_{\alpha=1}^N \phi_{i_\alpha}(\mbf r_\alpha, \sigma_\alpha)
+    \\
+    \bra{\Phi} \hat H \ket{\Phi}
+    &=
+    \bra{\Phi} \hat T \ket{\Phi}
+    +
+    \bra{\Phi} \hat V_\mtx{ext} \ket{\Phi}
+    +
+    \bra{\Phi} \hat V_\mtx{int} \ket{\Phi}
+    +
+    E_{II}
+    \\
+    \bra{\Phi} \hat T \ket{\Phi}
+    &=
+    \frac{1}{N!} \sum_{\{i_\alpha\}} \sum_{\{j_\beta\}}
+    \epsilon_{i_1 \cdots i_N} \epsilon_{j_1 \cdots j_N}
+    \int d\mbf r_1 \cdots d\mbf r_N
+    \prod_{\alpha=1}^N \phi_{i_\alpha}^*(\mbf r_\alpha, \sigma_\alpha)
+    \lt[\sum_\gamma -\frac12 \del_\gamma^2 \rt]
+    \prod_{\beta=1}^N \phi_{j_\beta}(\mbf r_\beta, \sigma_\beta)
+    \\
+  \end{align*}
+  The steps that proceed are: commute all $\phi_{j_\beta}$ that commute with each
+  $\del_\gamma^2$, leave the one that doesn't behind. The ones that commute will
+  form an inner product that utilizes orthonormality to ensure $i_\alpha =
+  j_{\alpha}$. Now we get the same redundancy as when computing the norm, and a
+  simlar simplification follows.
+  \begin{align*}
+    \bra{\Phi} \hat T \ket{\Phi}
+    &=
+    -\frac12 
+    \frac{1}{N!} \sum_{\{i_\alpha\}} \sum_{\{j_\beta\}}
+    \epsilon_{i_1 \cdots i_N} \epsilon_{j_1 \cdots j_N}
+    \sum_\gamma
+    \int d\mbf r_1 \cdots d\mbf r_N
+    \prod_{\alpha \ne \gamma} \phi_{i_\alpha}^*(\mbf r_\alpha, \sigma_\alpha)
+    \prod_{\beta \ne \gamma} \phi_{j_\beta}(\mbf r_\beta, \sigma_\beta)
+    \phi_{i_\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+    \del_\gamma^2 \phi_{j_\gamma}(\mbf r_\gamma, \sigma_\gamma)
+    \\
+    &=
+    -\frac12 
+    \frac{1}{N!} \sum_{\{i_\alpha\}} \sum_{\{j_\beta\}}
+    \epsilon_{i_1 \cdots i_N} \epsilon_{j_1 \cdots j_N}
+    \sum_\gamma
+    \prod_{\alpha \ne \gamma}
+    \lt\{
+    \int d\mbf r_\alpha 
+      \phi_{i_\alpha}^*(\mbf r_\alpha, \sigma_\alpha)
+      \phi_{j_\alpha}(\mbf r_\alpha, \sigma_\alpha)
+    \rt\}
+    \int d\mbf r_\gamma
+    \phi_{i_\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+    \del_\gamma^2 \phi_{j_\gamma}(\mbf r_\gamma, \sigma_\gamma)
+    \\
+    &=
+    -\frac12 
+    \frac{1}{N!} \sum_{\{i_\alpha\}} \sum_{\{j_\beta\}}
+    \epsilon_{i_1 \cdots i_N} \epsilon_{j_1 \cdots j_N}
+    \sum_\gamma
+    \prod_{\alpha \ne \gamma}
+    \delta_{i_\alpha,j_\alpha}
+    \int d\mbf r_\gamma
+    \phi_{i_\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+    \del_\gamma^2 \phi_{j_\gamma}(\mbf r_\gamma, \sigma_\gamma)
+  \end{align*}
+  Thus the sum over $j_\beta$ is consumed, setting all of $i_\alpha = j_\alpha$
+  for $\alpha \ne \gamma$, however this also determines that $i_\gamma = j_\gamma$
+  by process of elimination. This produces a sum of $N!$ identical terms.
+  \begin{align*}
+    \implies
+    \bra{\Phi} \hat T \ket{\Phi}
+    &=
+    -\frac12 
+    \sum_\gamma
+    \int d\mbf r_\gamma
+    \phi_\gamma^*(\mbf r_\gamma, \sigma_\gamma)
+    \del_\gamma^2 \phi_\gamma(\mbf r_\gamma, \sigma_\gamma)
+  \end{align*}
+  Thus the kinetic energy of the product wavefuntion is simply the sum of the
+  kinetic energies of the orbitals. This will occur the same for any one-body
+  property, since for these operators, we can form the inner product that sets the
+  $i_\alpha = j_\alpha$ for all $\alpha$.
+  \begin{align*}
+    \implies
+    \bra{\Phi}[ \hat T + \hat V_\mtx{ext} ]\ket{\Phi}
+    &=
+    \sum_i \int d\mbf r~
+    \phi_i^*(\mbf r,\sigma_i)
+    \lt[
+      -\frac12 \del^2 + V_\mtx{ext}(\mbf r)
+    \rt]
+    \phi_i(\mbf r,\sigma_i)
+  \end{align*}
+
+  For two body operators, something similar happens. Consider $\hat V_\mtx{int}$.
+  \begin{align*}
+    \bra{\Phi} \hat V_\mtx{int} \ket{\Phi}
+    &=
+    \frac{1}{N!} \sum_{\{i_\alpha\}} \sum_{\{j_\beta\}}
+    \epsilon_{i_1 \cdots i_N} \epsilon_{j_1 \cdots j_N}
+    \int d\mbf r_1 \cdots d\mbf r_N
+    \prod_{\alpha=1}^N \phi_{i_\alpha}^*(\mbf r_\alpha, \sigma_\alpha)
+    \lt[\frac 12 \sum_{\gamma \ne \delta} \frac 1{|\mbf r_\gamma - \mbf r_\delta|} \rt]
+    \prod_{\beta=1}^N \phi_{j_\beta}(\mbf r_\beta, \sigma_\beta)
+    \\
+    &=
+    \frac12 
+    \frac{1}{N!} \sum_{\{i_\alpha\}} \sum_{\{j_\beta\}}
+    \epsilon_{i_1 \cdots i_N} \epsilon_{j_1 \cdots j_N}
+    \sum_{\gamma \ne \delta}
+    \prod_{\alpha \ne \gamma,\delta}
+    \lt\{
+    \int d\mbf r_\alpha 
+      \phi_{i_\alpha}^*(\mbf r_\alpha, \sigma_\alpha)
+      \phi_{j_\alpha}(\mbf r_\alpha, \sigma_\alpha)
+    \rt\}
+    \\
+    &\times
+    \int d\mbf r_\gamma d\mbf r_\delta
+    \lt[
+    \frac 
+    {
+      \phi_{i_\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{i_\delta}^*(\mbf r_\delta, \sigma_\delta)
+      \phi_{j_\gamma}(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{j_\delta}(\mbf r_\delta, \sigma_\delta)
+    }
+    {|\mbf r_\gamma - \mbf r_\delta|} \rt]
+    \\
+    &=
+    \frac12 
+    \frac{1}{N!} \sum_{\{i_\alpha\}} \sum_{\{j_\beta\}}
+    \epsilon_{i_1 \cdots i_N} \epsilon_{j_1 \cdots j_N}
+    \sum_{\gamma \ne \delta}
+    \prod_{\alpha \ne \gamma,\delta}
+    \delta_{i_\alpha,j_\alpha}
+    \int d\mbf r_\gamma d\mbf r_\delta
+    \lt[
+    \frac 
+    {
+      \phi_{i_\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{i_\delta}^*(\mbf r_\delta, \sigma_\delta)
+      \phi_{j_\gamma}(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{j_\delta}(\mbf r_\delta, \sigma_\delta)
+    }
+    {|\mbf r_\gamma - \mbf r_\delta|} \rt]
+  \end{align*}
+  Now for $\alpha \ne \gamma, \delta$, $i_\alpha = j_\alpha$, but this time we
+  cannot further deduce that $i_\gamma = j_\gamma$ since there are two options
+  instead: $i_\gamma = j_\gamma$ and $i_\delta = j_\delta$, or $i_\gamma =
+  j_\delta$ and $i_\delta = j_\gamma$. The sum over $j_\alpha$ is consumed by the
+  delta functions (keeping in mind that observation). In the case that $i_\gamma =
+  j_\gamma$, the Levi-Civita symbol becomes squared and the term is positive. In
+  the other case, they differ by an exchange of indices, thus the product is negative.
+  \begin{align*}
+    \implies
+    \bra{\Phi} \hat V_\mtx{int} \ket{\Phi}
+    &=
+    \frac12 
+    \frac{1}{N!} \sum_{\{i_\alpha\}}
+    \sum_{\gamma \ne \delta}
+    \int d\mbf r_\gamma d\mbf r_\delta
+    \lt\{
+      \lt[
+      \frac 
+      {
+        \phi_{i_\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+        \phi_{i_\delta}^*(\mbf r_\delta, \sigma_\delta)
+        \phi_{i_\gamma}(\mbf r_\gamma, \sigma_\gamma)
+        \phi_{i_\delta}(\mbf r_\delta, \sigma_\delta)
+      }
+      {|\mbf r_\gamma - \mbf r_\delta|} \rt]
+    \rt.
+      \\
+      &-
+    \lt.
+      \lt[
+      \frac 
+      {
+        \phi_{i_\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+        \phi_{i_\delta}^*(\mbf r_\delta, \sigma_\delta)
+        \phi_{i_\delta}(\mbf r_\gamma, \sigma_\gamma)
+        \phi_{i_\gamma}(\mbf r_\delta, \sigma_\delta)
+      }
+      {|\mbf r_\gamma - \mbf r_\delta|} \rt]
+    \rt\}
+    \\
+    &=
+    \frac12 
+    \sum_{\gamma \ne \delta}
+    \int d\mbf r_\gamma d\mbf r_\delta
+    \lt[
+    \frac 
+    {
+      \phi_{\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{\delta}^*(\mbf r_\delta, \sigma_\delta)
+      \phi_{\gamma}(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{\delta}(\mbf r_\delta, \sigma_\delta)
+    }
+    {|\mbf r_\gamma - \mbf r_\delta|} \rt]
+      \\
+      &-
+    \frac12 
+    \sum_{\gamma \ne \delta}
+    \int d\mbf r_\gamma d\mbf r_\delta
+    \lt[
+    \frac 
+    {
+      \phi_{\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{\delta}^*(\mbf r_\delta, \sigma_\delta)
+      \phi_{\delta}(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{\gamma}(\mbf r_\delta, \sigma_\delta)
+    }
+    {|\mbf r_\gamma - \mbf r_\delta|} \rt]
+    \\
+    &=
+    \frac12 
+    \sum_{\gamma, \delta}
+    \int d\mbf r_\gamma d\mbf r_\delta
+    \lt[
+    \frac 
+    {
+      \phi_{\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{\delta}^*(\mbf r_\delta, \sigma_\delta)
+      \phi_{\gamma}(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{\delta}(\mbf r_\delta, \sigma_\delta)
+    }
+    {|\mbf r_\gamma - \mbf r_\delta|} \rt]
+      \\
+      &-
+    \frac12 
+    \sum_{\gamma, \delta}
+    \int d\mbf r_\gamma d\mbf r_\delta
+    \lt[
+    \frac 
+    {
+      \phi_{\gamma}^*(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{\delta}^*(\mbf r_\delta, \sigma_\delta)
+      \phi_{\delta}(\mbf r_\gamma, \sigma_\gamma)
+      \phi_{\gamma}(\mbf r_\delta, \sigma_\delta)
+    }
+    {|\mbf r_\gamma - \mbf r_\delta|} \rt]
+  \end{align*}
+  Putting this analysis together gives us our result.
+
+\section{\label{sec:hfeq} Derivation of the Hartree-Fock equations}
+  I suppress spin degree of freedom for simplicity.
+
+  We appoach it via the method of Lagrange multipliers. We vary the $\phi_i^*(\mbf
+  r)$ subject to the constraints $\braket{\phi_i}{\phi_i} = 1$. Basic theory of
+  Lagrange multipliers requires that
+  \begin{align*}
+    \delta \bra{\Phi} H \ket{\Phi} - \sum_i \delta \braket{\phi_i}{\phi_i}
+    &=
+    0
+  \end{align*}
+  So varying $\phi^*_i$,
+  \begin{align*}
+    \delta \bra{\Phi} \hat H \ket{\Phi}
+    &=
+    \sum_i \int d\mbf r
+    \delta \phi_i^*(\mbf r)
+    \lt(\hat T + \hat V_\mtx{ext}(\mbf r)\rt)
+    \phi_i(\mbf r)
+    \\
+    &+
+    \frac 12 \sum_{ij} \int d\mbf r d\mbf r'
+    \frac{\delta \phi_i^*(\mbf r) \phi_j^*(\mbf r') \phi_i(\mbf r) \phi_j(\mbf r')}
+    {|\mbf r - \mbf r'|}
+    +
+    \frac 12 \sum_{ij} \int d\mbf r d\mbf r'
+    \frac{\phi_i^*(\mbf r) \delta \phi_j^*(\mbf r') \phi_i(\mbf r) \phi_j(\mbf r')}
+    {|\mbf r - \mbf r'|}
+    \\
+    &-
+    \frac 12 \sum_{ij} \int d\mbf r d\mbf r'
+    \frac{\delta \phi_i^*(\mbf r) \phi_j^*(\mbf r') \phi_j(\mbf r) \phi_i(\mbf r')}
+    {|\mbf r - \mbf r'|}
+    -
+    \frac 12 \sum_{ij} \int d\mbf r d\mbf r'
+    \frac{\phi_i^*(\mbf r) \delta \phi_j^*(\mbf r') \phi_j(\mbf r) \phi_i(\mbf r')}
+    {|\mbf r - \mbf r'|}
+  \end{align*}
+  The right side two-body terms are identical to the left side up to renaming the
+  summation index and integration variables.
+  \begin{align*}
+    \delta \bra{\Phi} \hat H \ket{\Phi}
+    &=
+    \sum_i \int d\mbf r
+    \delta \phi_i^*(\mbf r)
+    \lt(\hat T + \hat V_\mtx{ext}(\mbf r)\rt)
+    \phi_i(\mbf r)
+    \\
+    &+
+    \sum_{ij} \int d\mbf r d\mbf r'
+    \frac{\delta \phi_i^*(\mbf r) \phi_j^*(\mbf r') \phi_i(\mbf r) \phi_j(\mbf r')}
+    {|\mbf r - \mbf r'|}
+    -
+    \sum_{ij} \int d\mbf r d\mbf r'
+    \frac{\delta \phi_i^*(\mbf r) \phi_j^*(\mbf r') \phi_j(\mbf r) \phi_i(\mbf r')}
+    {|\mbf r - \mbf r'|}
+    \\
+    &=
+    \sum_i \int d\mbf r \delta \phi_i^*(\mbf r) \lt\{
+      \lt(\hat T + \hat V_\mtx{ext} \rt)
+      + \sum_j \int d\mbf r' 
+      \frac{\phi_j^*(\mbf r') \phi_i(\mbf r) \phi_j(\mbf r')}
+      {|\mbf r - \mbf r'|}
+      - \sum_j \int d\mbf r' 
+      \frac{\phi_j^*(\mbf r') \phi_j(\mbf r) \phi_i(\mbf r')}
+      {|\mbf r - \mbf r'|}
+    \rt\}
+  \end{align*}
+  Thus,
+  \begin{align*}
+    &\delta \bra{\Phi} H \ket{\Phi} - \sum_i \delta \braket{\phi_i}{\phi_i}
+    = 0
+    \\
+    \iff
+    &\sum_i \int d\mbf r \delta \phi_i^*(\mbf r) \lt\{
+      \lt(\hat T + \hat V_\mtx{ext} \rt) \phi_i(\mbf r)
+      + \sum_j \int d\mbf r' 
+      \frac{\phi_j^*(\mbf r') \phi_i(\mbf r) \phi_j(\mbf r')}
+      {|\mbf r - \mbf r'|}
+      - \sum_j \int d\mbf r' 
+      \frac{\phi_j^*(\mbf r') \phi_j(\mbf r) \phi_i(\mbf r')}
+      {|\mbf r - \mbf r'|}
+      -
+      \vep_i \phi_i(\mbf r)
+    \rt\}
+    = 0
+  \end{align*}
+  Since $\delta \phi_i^*(\mbf r)$ is arbitrary, the term in the brackets must be
+  zero for all $i$. These are the Hartree-Fock equations.
+
+\section{\label{sec:koop} Proof of Koopman's theorem}
+  Here are the Hartree-Fock equations written more explicitly:
+  \begin{align}
+    \label{eq:hfeq}
+    \lt[
+      -\frac12 \del^2 + V_\mtx{ext}
+      + \sum_{j,\sigma_j} \int d\mbf r' 
+      \frac{\phi_j^{\sigma_j *}(\mbf r') \phi_j^{\sigma_j}(\mbf r')}{|\mbf r - \mbf r'|}
+    \rt] \phi_i^{\sigma} (\mbf r)
+    - \sum_j \int d\mbf r' 
+    \frac{\phi_j^{\sigma_j *}(\mbf r') \phi_i^{\sigma}(\mbf r')}{|\mbf r - \mbf r'|} \phi_j^\sigma(\mbf r)
+    =
+    \varepsilon_i^\sigma \phi_i^\sigma(\mbf r)
+  \end{align}
+  Taking an inner product of (\ref{eq:hfeq}) with $\bra{\phi_i}$,
+  \begin{align*}
+    \varepsilon_i^\sigma
+    &=
+    \int d\mbf r~\phi_i^*(\mbf r) \lt\{
+      \lt[
+        -\frac12 \del^2 + V_\mtx{ext}
+        + \sum_{j,\sigma_j} \int d\mbf r' 
+        \frac{\phi_j^{\sigma_j *}(\mbf r') \phi_j^{\sigma_j}(\mbf r')}{|\mbf r - \mbf r'|}
+      \rt] \phi_i^{\sigma} (\mbf r)
+      -
+      \sum_j \int d\mbf r' 
+      \frac{\phi_j^{\sigma_j *}(\mbf r') \phi_i^{\sigma}(\mbf r')}{|\mbf r - \mbf r'|} \phi_j^\sigma(\mbf r)
+    \rt\}
+    \\
+    &=
+    \int d\mbf r~ \phi_i^*(\mbf r) \lt[
+      \hat T + V_\mtx{ext}(\mbf r)
+    \rt] \phi(\mbf r)
+    +
+    \sum_j \int d\mbf r~d\mbf r'
+    \frac{\phi_i^*(\mbf r) \phi_j^*(\mbf r') \phi_i(\mbf r) \phi_j(\mbf r')}
+    {|\mbf r - \mbf r'|}
+    -
+    \sum_j \int d\mbf r~d\mbf r'
+    \frac{\phi_i^*(\mbf r) \phi_j^*(\mbf r') \phi_j(\mbf r) \phi_i(\mbf r')}
+    {|\mbf r - \mbf r'|}
+  \end{align*}
+  On the other hand, consider the Slater determinant with the $k$th orbital
+  missing, denoted $\ket{\Phi_{N-1}^{(k)}}$. (See eq. \ref{eq:hfengy}).
+  \begin{align*}
+    \bra{\Phi_{N-1}^{(k)}} \hat H \ket{\Phi_{N-1}^{(k)}}
+    &=
+    \sum_{i \ne k} \int d\mbf r~\phi_i(\mbf r) \lt[
+      \hat T + V_\mtx{ext}(\mbf r) 
+    \rt] \phi_i(\mbf r)
+    \\
+    &+
+    \frac 12 \sum_{i,j\ne k}\int d\mbf r~d\mbf r'~
+    \frac{\phi_i^*(\mbf r) \phi_j^*(\mbf r') \phi_i(\mbf r) \phi_j(\mbf r')}
+    {|\mbf r - \mbf r'|}
+    \\
+    &-
+    \frac 12 \sum_{i,j\ne k}\int d\mbf r~d\mbf r'~
+    \frac{\phi_i^*(\mbf r) \phi_j^*(\mbf r') \phi_j(\mbf r) \phi_i(\mbf r')}
+    {|\mbf r - \mbf r'|}
+  \end{align*}
+  The one-body terms come readily, since they are simply missing one term in the
+  sum (when $i = k$). The two-body terms have two series of terms for both the
+  direct and exchange terms that are missing, when $i=k$ and when $j=k$. I'll
+  focus on the direct terms, since the exchange follow for identical reasons.
+  \begin{align*}
+    \implies
+    \bra{\Phi_{N-1}^{(k)}} \hat H \ket{\Phi_{N-1}^{(k)}} - \bra{\Phi} \hat H \ket{\Phi}
+    &=
+    -\int d\mbf r~\phi_k(\mbf r) \lt[
+      \hat T + V_\mtx{ext}(\mbf r) 
+    \rt] \phi_k(\mbf r)
+    \\
+    &-
+    \frac 12 \sum_j \int d\mbf r~d\mbf r'
+    \frac{\phi_k^*(\mbf r) \phi_j^*(\mbf r') \phi_k(\mbf r) \phi_j(\mbf r')}
+    {|\mbf r - \mbf r'|}
+    \\
+    &-
+    \frac 12 \sum_i \int d\mbf r~d\mbf r'
+    \frac{\phi_i^*(\mbf r) \phi_k^*(\mbf r') \phi_i(\mbf r) \phi_k(\mbf r')}
+    {|\mbf r - \mbf r'|}
+    \\
+    &+
+    \mtx{Exchange~terms}
+  \end{align*}
+  Now the two direct terms will be identical if we exchange both $\mbf r
+  \leftrightarrow \mbf r'$ in the second integral. The same simplification follows
+  for the exchange term which I neglected to write out.
+  \begin{align*}
+    \implies
+    \bra{\Phi_{N-1}^{(k)}} \hat H \ket{\Phi_{N-1}^{(k)}} - \bra{\Phi} \hat H \ket{\Phi}
+    &=
+    -\int d\mbf r~\phi_k(\mbf r) \lt[
+      \hat T + V_\mtx{ext}(\mbf r) 
+    \rt] \phi_k(\mbf r)
+    \\
+    &-
+    \sum_j \int d\mbf r~d\mbf r'
+    \frac{\phi_k^*(\mbf r) \phi_j^*(\mbf r') \phi_k(\mbf r) \phi_j(\mbf r')}
+    {|\mbf r - \mbf r'|}
+    \\
+    &+
+    \sum_j \int d\mbf r~d\mbf r'
+    \frac{\phi_k^*(\mbf r) \phi_j^*(\mbf r') \phi_j(\mbf r) \phi_k(\mbf r')}
+    {|\mbf r - \mbf r'|}
+  \end{align*}
+  which now matches the right hand side of the expression for $\varepsilon_k$.
+  This completes the proof for subtraction of orbitals from the Slater
+  determinant, the same sequence of steps works with adding an orbital, since now
+  $\bra \Phi \hat H \ket \Phi$ does not contain the added orbital, and hence the
+  result switches sign.
+
+\end{document}
+
